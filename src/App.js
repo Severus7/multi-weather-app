@@ -11,6 +11,50 @@ const WeatherContext = React.createContext({
   addCity: (name, temperature) => {},
 });
 
+// City List
+const CityList = () => {
+  const context = React.useContext(WeatherContext);
+
+  return (
+    <table className="city-list">
+      <thead>
+        <tr>
+          <th>City</th>
+          <th>Temperature</th>
+        </tr>
+      </thead>
+      <tbody>
+        {context.cities.map((city, i) => (
+          <tr key={city.name}>
+            <td>{city.name}</td>
+            <td>{city.temperature}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
+const TemperatureAverage = (props) => {
+  const context = React.useContext(WeatherContext);
+
+  if (context.cities.length === 0) {
+    return <div>Add some cities to view their average temperatures.</div>;
+  }
+
+  let total = 0;
+  for (const city of context.cities) {
+    total += city.temperature;
+  }
+  const avg = total / context.cities.length;
+
+  return (
+    <div>
+      The average <b>{avg.toFixed(2)}</b> degress Fahrenheit.
+    </div>
+  );
+};
+
 function App() {
   /**
    * In this function...
