@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+
+/* 
+  This React Context stores two things:
+  1. Array of cities 
+  2. A function to add cities to this array
+*/
+const WeatherContext = React.createContext({
+  cities: [],
+  addCity: (name, temperature) => {},
+});
 
 function App() {
+  /**
+   * In this function...
+   * React Hooks are used to keep track of the array cities and crate a setter setCities
+   * The addCity function wraps the setCities which will be added into the Context
+   * The root value in the hierarchy is provided using the WeatherContext.Provider
+   * The child components such as CityList are used under this provider.
+   */
+
+  const [cities, setCities] = React.useState([]);
+
+  const addCity = (name, temperature) => {
+    const newCity = { name, temperature };
+    setCities((prevCities) => [...prevCities, { name, temperature }]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <WeatherContext.Provider value={{ cities, addCity }}>
+      <div className="city-overview">
+        <h2>Multi-Weather App</h2>
+        <CityList />
+        <AddCityButton />
+        <TemperatureAverage />
+      </div>
+    </WeatherContext.Provider>
   );
 }
 
