@@ -1,38 +1,48 @@
-.App {
-  text-align: center;
+.city-overview {
+  display: inline-grid;
+  gap: 1em;
+  padding: 2em;
+  margin: 2em;
+  background: #f7f7f7;
+  box-shadow: 0px 2px 5px 1px #7777;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.city-overview h2 {
+  margin-top: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.city-overview .city-list {
+  background: #fff;
+  border-collapse: collapse;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.city-overview .city-list td,
+.city-overview .city-list th {
+  border: 1px solid #aaa;
+  padding: 0.5em 1em;
+}
+
+.city-overview .add-city-form {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1em;
+}
+
+.city-overview .input {
+  padding: 0.25em 0.5em;
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid #aaa;
+  font: inherit;
+}
+
+.city-overview .input:focus {
+  border-color: #17f;
+}
+
+.city-overview button.input {
+  background-color: #17f;
+  border-color: #17f;
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  cursor: pointer;
 }
